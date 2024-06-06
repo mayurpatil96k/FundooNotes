@@ -1,7 +1,9 @@
 <script>
 export default {
   data: () => ({
-    email: '',
+    username: '',
+    fname: '',
+    lname: '',
     password: '',
     visible: false,
     emailRules: [
@@ -12,17 +14,46 @@ export default {
       }
     ],
     passRules: [
-      (value) => {
-        if (value.length >= 8) return true
-        return 'length of password must be greater than 8'
-      }
+    value => {
+    if (value.length >= 8) {
+      return true;
+    }
+    return 'Password must be at least 8 characters long.';
+  },
+  value => {
+    if (/[A-Z]/.test(value)) {
+      return true;
+    }
+    return 'Password must contain at least one uppercase letter.';
+  },
+  value => {
+    if (/[a-z]/.test(value)) {
+      return true;
+    }
+    return 'Password must contain at least one lowercase letter.';
+  },
+  value => {
+    if (/[0-9]/.test(value)) {
+      return true;
+    }
+    return 'Password must contain at least one number.';
+  },
+  value => {
+    if (/[^A-Za-z0-9]/.test(value)) {
+      return true;
+    }
+    return 'Password must contain at least one special character.';
+  }
     ]
   }),
   methods: {
     submit() {
       const obj = {
-        email: this.email,
+        fname: this.fname,
+        lname: this.lname,
+        username: this.username,
         password: this.password
+        
       }
       console.log(obj)
     }
@@ -42,7 +73,8 @@ export default {
 
       <div class="d-flex">
         <v-text-field
-          v-model="email"
+          v-model="fname"
+          :rules="[v => !!v || 'Name is required']"
           class="email-field pr-2"
           label="First Name"
           density="compact"
@@ -50,8 +82,9 @@ export default {
         ></v-text-field>
 
         <v-text-field
-          v-model="email"
+          v-model="lname"
           class="email-field"
+          :rules="[v => !!v || 'Name is required']"
           label="Last Name"
           density="compact"
           variant="outlined"
@@ -59,7 +92,7 @@ export default {
       </div>
 
       <v-text-field
-        v-model="email"
+        v-model="username"
         class="email-field "
         label="Username"
         :rules="emailRules"
@@ -74,7 +107,7 @@ export default {
 
       <div class="d-flex pt-8">
         <v-text-field
-          v-model="password"
+        v-model="password"
           class="email-field pr-2"
           label="Password"
           :rules="passRules"
@@ -86,10 +119,9 @@ export default {
         ></v-text-field>
 
         <v-text-field
-          v-model="password"
           class="email-field"
           label="Confirm"
-          :rules="passRules"
+          :rules="[v => v==this.password || 'password didnot matched']"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           density="compact"
@@ -101,7 +133,7 @@ export default {
       <div class="text-caption">Use 8 or more charectorss with a mix of letters,numbers & symbols</div>
 
       <div class="d-flex pt-10">
-        <a href="#">Sign in instead </a>
+        <router-link to="login"><a href="#">Sign in instead </a></router-link>
 
         <v-btn style="margin-left: auto" color="blue" size="large" variant="flat" @click="submit">
           <span class="text-button text-center">Sign Up</span>

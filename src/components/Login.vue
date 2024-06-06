@@ -81,7 +81,8 @@
 
       <div class="d-flex">
 
-        <a href="http://" target="_blank" rel="noopener noreferrer">Create Account</a>
+
+        <router-link to="signup"><a href="http://" target="_blank" rel="noopener noreferrer">Create Account</a></router-link>
 
       <v-btn
          style="margin-left: auto;"
