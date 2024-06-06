@@ -1,8 +1,32 @@
 <script>
   export default {
     data: () => ({
+      email: '',
+      password: '',
       visible: false,
+      emailRules: [
+        value => {
+          if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
+
+        return 'Must be a valid e-mail.'
+        },
+      ],
+      passRules:[
+        value =>{
+          if(value.length >=8)return true
+          return 'length of password must be greater than 8'
+        }
+      ],
     }),
+    methods:{
+      submit(){
+        const obj={
+          "email": this.email,
+          "password": this.password
+        }
+        console.log(obj);
+      }
+    }
   }
 </script>
 
@@ -26,8 +50,10 @@
       <div class="text-body-1 pb-6 text-center">with your Google Account</div>
 
       <v-text-field
-      class="email-field"
+      v-model="email"
+      class="email-field py-2"
       label="Email or Phone"
+      :rules="emailRules"
         density="compact"
         prepend-inner-icon="mdi-email-outline"
         variant="outlined"
@@ -35,8 +61,10 @@
 
 
       <v-text-field
-      class="email-field"
+      v-model="password"
+      class="email-field py-2"
       label="Password"
+      :rules="passRules"
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
@@ -60,6 +88,7 @@
         color="blue"
         size="large"
         variant="flat"
+        @click="submit"
       >
         <span class="text-button text-center">Log in</span>
       </v-btn>
