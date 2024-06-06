@@ -62,8 +62,10 @@ export default {
 </script>
 
 <template>
+    <div class="d-lg-flex justify-center align-center" >
+
+        <v-card class="d-lg-flex pa-12 pb-5" elevation="9" rounded="lg">
   <div class="py-10">
-    <v-card class="mx-auto pa-12 pb-5" elevation="9" max-width="455" rounded="lg">
       <v-img
         max-width="100"
         src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
@@ -139,13 +141,31 @@ export default {
           <span class="text-button text-center">Sign Up</span>
         </v-btn>
       </div>
-    </v-card>
+    </div>
+
+  <div class="hidden-div d-flex flex-sm-column justify-center align-center px-10">
+    <img src="../assets/Screenshot 2024-06-06 165618.png" alt="Loading">
+    <div class="text-h6 px-2 text-center">One account. All of Google <br>
+        Working for you</div>
   </div>
+</v-card>
+</div>
 </template>
 
 <style>
 a {
   text-decoration: none;
   color: rgb(0, 85, 255);
+}
+
+@media screen and (max-width: 480px){
+.hidden-div{
+    display: none;
+}
+}
+@media screen and (max-width: 1280px){
+.hidden-div{
+    display: none;
+}
 }
 </style>
