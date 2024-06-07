@@ -49,7 +49,11 @@ export default {
     ]
   }),
   methods: {
-    submit() {
+    async submit() {
+      const form = this.$refs.form;
+  if (form) {
+    const { valid } = await form.validate();
+    if (valid) {
       const obj = {
         firstName: this.fname,
         lastName: this.lname,
@@ -60,11 +64,15 @@ export default {
 
       signup(obj)
         .then(() => {
-          alert('SignUp Successful...')
+          alert('Sign Up Successful...')
         })
         .catch((error) => {
           alert('Error: ' + error.message)
         })
+    }
+  } else {
+    console.error('Form reference is not defined.');
+  }
     }
   }
 }
@@ -80,12 +88,12 @@ export default {
         ></v-img>
 
         <div class="text-h5 py-3">Create your Google Account</div>
-
-        <div class="d-flex">
+        <v-form ref="form">
+                  <div class="d-md-flex d-sm-flex">
           <v-text-field
             v-model="fname"
             :rules="[(v) => !!v || 'Name is required']"
-            class="email-field pr-2"
+            class="email-field"
             label="First Name"
             density="compact"
             variant="outlined"
@@ -115,10 +123,10 @@ export default {
           >Use my current email address instead</a
         >
 
-        <div class="d-flex pt-8">
+        <div class="d-md-flex d-sm-flex pt-8">
           <v-text-field
             v-model="password"
-            class="email-field pr-2"
+            class="email-field"
             label="Password"
             :rules="passRules"
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
@@ -150,7 +158,11 @@ export default {
           <v-btn style="margin-left: auto" color="blue" size="large" variant="flat" @click="submit">
             <span class="text-button text-center">Sign Up</span>
           </v-btn>
+          
         </div>
+      </v-form>
+
+
       </div>
 
       <div class="hidden-div d-flex flex-sm-column justify-center align-center px-10">
@@ -174,21 +186,9 @@ a {
   display: flex;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 450px) {
   .hidden-div {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 1281px) and (max-width: 1920px) {
-  .hidden-div {
-    display: flex;
-  }
-}
-
-@media screen and (min-width: 1921px) {
-  .hidden-div {
-    display: flex;
+    display: none !important;
   }
 }
 </style>

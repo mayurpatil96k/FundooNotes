@@ -21,19 +21,27 @@ export default {
     ]
   }),
   methods: {
-    submit() {
-      const obj = { email: this.email, password: this.password }
-      login(obj)
-        .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data)))
-        .then(()=>alert("Login Successful..."))
-        .catch((err) => alert(err))
+      async submit() {
+        const form = this.$refs.form;
+      if (form) {
+        const { valid } = await form.validate();
+        if (valid) {
+          const obj = { email: this.email, password: this.password }
+          login(obj)
+            .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data)))
+            .then(() => alert("Login Successful..."))
+            .catch((err) => alert(err))
+        }
+      } else {
+        console.error('Form reference is not defined.');
+      }
     }
   }
 }
 </script>
 
 <template>
-  <div class="py-10">
+  <div>
     <v-card class="mx-auto pa-12 pb-5" elevation="9" max-width="455" rounded="lg">
       <v-img
         class="mx-auto my-3"
@@ -44,13 +52,13 @@ export default {
       <div class="text-h4 pb-3 text-center">Sign In</div>
       <div class="text-body-1 pb-6 text-center">with your Google Account</div>
 
+      <v-form ref="form">
       <v-text-field
         v-model="email"
         class="email-field py-2"
         label="Email or Phone"
         :rules="emailRules"
         density="compact"
-        prepend-inner-icon="mdi-email-outline"
         variant="outlined"
       ></v-text-field>
 
@@ -62,10 +70,10 @@ export default {
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
-        prepend-inner-icon="mdi-lock-outline"
         variant="outlined"
         @click:append-inner="visible = !visible"
       ></v-text-field>
+    </v-form>
 
       <div class="text-body-2 pb-6">
         <a href="http://" target="_blank" rel="noopener noreferrer">Forgot email?</a>
