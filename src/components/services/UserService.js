@@ -6,7 +6,7 @@ export const signup = (signdata) => {
   const headers = {
     'Content-Type': 'application/json'
   }
-  return post('user/signup', signdata, headers)
+  return post('user/userSignUp', signdata, headers)
 }
 
 export const login = (loginData) => {
@@ -15,5 +15,5 @@ export const login = (loginData) => {
   const headers = {
     'Content-Type': 'application/json'
   }
-  return post('user/signup', loginData, headers)
+  return post('user/login', loginData, headers)
 }
