@@ -1,4 +1,5 @@
 <script>
+import {signup} from '../components/services/UserService'
 export default {
   data: () => ({
     username: '',
@@ -55,7 +56,7 @@ export default {
         password: this.password
         
       }
-      console.log(obj)
+      signup(obj);
     }
   }
 }
@@ -158,14 +159,25 @@ a {
   color: rgb(0, 85, 255);
 }
 
-@media screen and (max-width: 480px){
-.hidden-div{
+.hidden-div {
+  display: flex;
+}
+
+@media screen and (max-width: 1280px) {
+  .hidden-div {
     display: none;
+  }
 }
+
+@media screen and (min-width: 1281px) and (max-width: 1920px) {
+  .hidden-div {
+    display: flex;
+  }
 }
-@media screen and (max-width: 1280px){
-.hidden-div{
-    display: none;
-}
+
+@media screen and (min-width: 1921px) {
+  .hidden-div {
+    display: flex;
+  }
 }
 </style>
