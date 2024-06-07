@@ -1,4 +1,5 @@
 <script>
+import { login } from './services/UserService';
   export default {
     data: () => ({
       email: '',
@@ -24,7 +25,7 @@
           "email": this.email,
           "password": this.password
         }
-        console.log(obj);
+        login(obj);
       }
     }
   }
