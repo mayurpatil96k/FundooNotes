@@ -80,7 +80,7 @@ export default {
 
 <template>
   <div class="d-lg-flex justify-center align-center">
-    <v-card class="d-lg-flex pa-12 pb-5" elevation="9" rounded="lg">
+    <v-card class="d-lg-flex pl-lg-15 pl-sm-0" elevation="9" rounded="lg">
       <div class="py-10">
         <v-img
           max-width="100"
@@ -93,7 +93,7 @@ export default {
           <v-text-field
             v-model="fname"
             :rules="[(v) => !!v || 'Name is required']"
-            class="email-field"
+            class="email-field pr-lg-2 pr-sm-0 mpad"
             label="First Name"
             density="compact"
             variant="outlined"
@@ -126,7 +126,7 @@ export default {
         <div class="d-md-flex d-sm-flex pt-8">
           <v-text-field
             v-model="password"
-            class="email-field"
+            class="email-field pr-lg-2 pr-sm-0"
             label="Password"
             :rules="passRules"
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
@@ -189,6 +189,10 @@ a {
 @media screen and (max-width: 450px) {
   .hidden-div {
     display: none !important;
+  }
+  .mpad{
+    padding-left: 0%;
+    padding-right: 0%;
   }
 }
 </style>

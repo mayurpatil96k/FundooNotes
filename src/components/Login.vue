@@ -5,6 +5,9 @@ export default {
     email: '',
     password: '',
     visible: false,
+    snackbar: false,
+    text: 'My timeout is set to 2000.',
+    timeout: 2000,
     emailRules: [
       (value) => {
         if (!value) return 'Must be a valid email address.'
@@ -21,19 +24,19 @@ export default {
     ]
   }),
   methods: {
-      async submit() {
-        const form = this.$refs.form;
+    async submit() {
+      const form = this.$refs.form
       if (form) {
-        const { valid } = await form.validate();
+        const { valid } = await form.validate()
         if (valid) {
           const obj = { email: this.email, password: this.password }
           login(obj)
             .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data)))
-            .then(() => alert("Login Successful..."))
-            .catch((err) => alert(err))
+            .then(() => alert('Login Successful...'))
+            .catch((err) => console.log(err))
         }
       } else {
-        console.error('Form reference is not defined.');
+        console.error('Form reference is not defined.')
       }
     }
   }
@@ -53,27 +56,27 @@ export default {
       <div class="text-body-1 pb-6 text-center">with your Google Account</div>
 
       <v-form ref="form">
-      <v-text-field
-        v-model="email"
-        class="email-field py-2"
-        label="Email or Phone"
-        :rules="emailRules"
-        density="compact"
-        variant="outlined"
-      ></v-text-field>
+        <v-text-field
+          v-model="email"
+          class="email-field py-2"
+          label="Email or Phone"
+          :rules="emailRules"
+          density="compact"
+          variant="outlined"
+        ></v-text-field>
 
-      <v-text-field
-        v-model="password"
-        class="email-field py-2"
-        label="Password"
-        :rules="passRules"
-        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible ? 'text' : 'password'"
-        density="compact"
-        variant="outlined"
-        @click:append-inner="visible = !visible"
-      ></v-text-field>
-    </v-form>
+        <v-text-field
+          v-model="password"
+          class="email-field py-2"
+          label="Password"
+          :rules="passRules"
+          :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+          :type="visible ? 'text' : 'password'"
+          density="compact"
+          variant="outlined"
+          @click:append-inner="visible = !visible"
+        ></v-text-field>
+      </v-form>
 
       <div class="text-body-2 pb-6">
         <a href="http://" target="_blank" rel="noopener noreferrer">Forgot email?</a>
