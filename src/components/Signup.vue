@@ -147,6 +147,7 @@ export default {
             @click:append-inner="visible = !visible"
           ></v-text-field>
         </div>
+        
 
         <div class="text-caption">
           Use 8 or more charectorss with a mix of letters,numbers & symbols
