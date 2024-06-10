@@ -32,11 +32,7 @@ export default {
       if (form) {
         const { valid } = await form.validate()
         if (valid) {
-          const obj = { email: this.email, password: this.password }
-          login(obj)
-            .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data)))
-            .then(() => this.showSnackbar('Login Successful', 3000))
-            .catch(() => this.showSnackbar('Login Failed. Please try again.', 3000))
+          console.log("clicked...")
         }
       } else {
         console.error('Form reference is not defined.')
@@ -60,19 +56,12 @@ export default {
         src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
       ></v-img>
 
-      <div class="text-h4 pb-3 text-center">Sign In</div>
-      <div class="text-body-1 pb-6 text-center">Password Google Account</div>
+      <div class="text-h5 pb-3 text-center">Change Password</div>
+      <div class="text-body-2 pb-6">
+        Create a new strong password that toy do not use for other websites
+      </div>
 
       <v-form ref="form">
-        <v-text-field
-          v-model="email"
-          class="email-field py-2"
-          label="Email or Phone"
-          :rules="emailRules"
-          density="compact"
-          variant="outlined"
-        ></v-text-field>
-
         <v-text-field
           v-model="password"
           class="email-field py-2"
@@ -85,26 +74,30 @@ export default {
           @click:append-inner="visible = !visible"
         ></v-text-field>
 
+        <v-text-field
+            class="email-field"
+            label="Confirm Password"
+            :rules="[(v) => v == this.password || 'password didnot matched']"
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+            :type="visible ? 'text' : 'password'"
+            density="compact"
+            variant="outlined"
+            @click:append-inner="visible = !visible"
+          ></v-text-field>
+
       </v-form>
 
       <div class="text-body-2 pb-6">
-        <a href="http://" target="_blank" rel="noopener noreferrer">Forgot email?</a>
+       
       </div>
 
-      <div class="text-body-2 pb-6">
-        Not your Account? Use Guest mode to sign in Privately
-        <a href="http://" target="_blank" rel="noopener noreferrer">Learn More</a>
-      </div>
+      
 
       <div class="d-flex">
-        <router-link to="signup"
-          ><a href="http://" target="_blank" rel="noopener noreferrer"
-            >Create Account</a
-          ></router-link
-        >
+        
 
         <v-btn style="margin-left: auto" color="blue" size="large" variant="flat" @click="submit">
-          <span class="text-button text-center">Log in</span>
+          <span class="text-button text-center">Next</span>
         </v-btn>
       </div>
     </v-card>

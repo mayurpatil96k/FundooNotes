@@ -3,12 +3,26 @@ import { login } from './services/UserService'
 export default {
   data: () => ({
     email: '',
+    password: '',
+    visible: false,
+    timeout: 2000,
+    snackbar: {
+        visible: false,
+        text: '',
+        timeout: 3000 
+      },
     emailRules: [
       (value) => {
         if (!value) return 'Must be a valid email address.'
 
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
         return emailPattern.test(value) || 'Must be a valid email address.'
+      }
+    ],
+    passRules: [
+      (value) => {
+        if (value.length >= 8) return true
+        return 'length of password must be greater than 8'
       }
     ]
   }),
