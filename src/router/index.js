@@ -34,6 +34,11 @@ const router = createRouter({
       path: '/newnote',
       name: 'newnote',
       component: () => import('../components/NewNote.vue')
+    },
+    {
+      path: '/',
+      name: 'index',
+      component: () => import('../components/Login.vue')
     }
   ]
 })

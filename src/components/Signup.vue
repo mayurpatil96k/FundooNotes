@@ -6,6 +6,7 @@ export default {
     fname: '',
     lname: '',
     password: '',
+    checkbox1: false,
     visible: false,
     emailRules: [
       (value) => {
@@ -64,7 +65,7 @@ export default {
 
       signup(obj)
         .then(() => {
-          alert('Sign Up Successful...')
+          this.$router.push('/dashboard')
         })
         .catch((error) => {
           alert('Error: ' + error.message)
@@ -129,7 +130,6 @@ export default {
             class="email-field pr-lg-2 pr-sm-0"
             label="Password"
             :rules="passRules"
-            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
             density="compact"
             variant="outlined"
@@ -140,7 +140,6 @@ export default {
             class="email-field"
             label="Confirm"
             :rules="[(v) => v == this.password || 'password didnot matched']"
-            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
             density="compact"
             variant="outlined"
@@ -148,6 +147,14 @@ export default {
           ></v-text-field>
         </div>
         
+        <v-checkbox
+        v-model="visible"
+           
+            color="blue-darken-1"
+            label="Show Password"
+            value="indigo-darken-3"
+          
+          ></v-checkbox>
 
         <div class="text-caption">
           Use 8 or more charectorss with a mix of letters,numbers & symbols
@@ -156,8 +163,8 @@ export default {
         <div class="d-flex pt-10">
           <router-link to="login"><a href="#">Sign in instead </a></router-link>
 
-          <v-btn style="margin-left: auto" color="blue" size="large" variant="flat" @click="submit">
-            <span class="text-button text-center">Sign Up</span>
+          <v-btn class="text-none" style="margin-left: auto" color="blue" size="large" variant="flat" @click="submit">
+            <span class="text-center">Sign up</span>
           </v-btn>
           
         </div>

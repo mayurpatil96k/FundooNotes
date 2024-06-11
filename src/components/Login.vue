@@ -7,10 +7,10 @@ export default {
     visible: false,
     timeout: 2000,
     snackbar: {
-        visible: false,
-        text: '',
-        timeout: 3000 
-      },
+      visible: false,
+      text: '',
+      timeout: 3000
+    },
     emailRules: [
       (value) => {
         if (!value) return 'Must be a valid email address.'
@@ -35,7 +35,11 @@ export default {
           const obj = { email: this.email, password: this.password }
           login(obj)
             .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data.data.id)))
-            .then(() => this.showSnackbar('Login Successful', 3000))
+            .then(() => {
+              this.showSnackbar('Login Successful', 2000)
+              setTimeout(()=>this.$router.push('/dashboard'),2000)
+              
+            })
             .catch(() => this.showSnackbar('Login Failed. Please try again.', 3000))
         }
       } else {
@@ -43,9 +47,9 @@ export default {
       }
     },
     showSnackbar(message, timeout) {
-      this.snackbar.text = message;
-      this.snackbar.timeout = timeout;
-      this.snackbar.visible = true;
+      this.snackbar.text = message
+      this.snackbar.timeout = timeout
+      this.snackbar.visible = true
     }
   }
 }
@@ -63,7 +67,7 @@ export default {
       <div class="text-h4 pb-3 text-center">Sign In</div>
       <div class="text-body-1 pb-6 text-center">with your Google Account</div>
 
-      <v-form ref="form">
+      <v-form ref="form" validate-on="input">
         <v-text-field
           v-model="email"
           class="email-field py-2"
@@ -78,13 +82,19 @@ export default {
           class="email-field py-2"
           label="Password"
           :rules="passRules"
-          :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           density="compact"
           variant="outlined"
           @click:append-inner="visible = !visible"
         ></v-text-field>
 
+        <v-checkbox
+          v-model="visible"
+          color="blue-darken-1"
+          label="Show Password"
+          value="indigo-darken-3"
+          style="margin: 0; padding: 0"
+        ></v-checkbox>
       </v-form>
 
       <div class="text-body-2 pb-6">
@@ -103,20 +113,21 @@ export default {
           ></router-link
         >
 
-        <v-btn style="margin-left: auto" color="blue" size="large" variant="flat" @click="submit">
-          <span class="text-button text-center">Log in</span>
+        <v-btn
+          class="text-none"
+          style="margin-left: auto"
+          color="blue"
+          size="large"
+          variant="flat"
+          @click="submit"
+        >
+          <span class="text-center">Log in</span>
         </v-btn>
       </div>
     </v-card>
 
     <v-snackbar v-model="snackbar.visible" :timeout="snackbar.timeout">
       {{ snackbar.text }}
-
-      <template v-slot:actions>
-        <v-btn color="blue" variant="text" @click="snackbar.visible = false">
-          Close
-        </v-btn>
-      </template>
     </v-snackbar>
   </div>
 </template>

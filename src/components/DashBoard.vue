@@ -1,9 +1,11 @@
 <script>
 import NewNote from './NewNote.vue'
+import Icon from './Icon.vue';
 
 export default {
   components: {
-    NewNote
+    NewNote,
+    Icon
   },
   data: () => ({
     drawer: true,
@@ -113,90 +115,146 @@ export default {
           <v-divdider></v-divdider>
 
           <v-list density="compact" nav>
-            <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+            
             <v-list-item
-              prepend-icon="mdi-account"
-              title="My Account"
-              value="account"
+              prepend-icon="mdi-lightbulb-outline"
+              title="Notes"
+              value="Notes"
             ></v-list-item>
             <v-list-item
-              prepend-icon="mdi-account-group-outline"
-              title="Users"
-              value="users"
+              prepend-icon="mdi-bell-outline"
+              title="Reminders"
+              value="Reminders"
             ></v-list-item>
+            <v-list-item prepend-icon="mdi-pencil" title="Edit Label" value="Edit Label"></v-list-item>
+            <v-list-item prepend-icon="mdi-archive-arrow-down-outline" title="Archieve" value="Archieve"></v-list-item>
+            <v-list-item prepend-icon="mdi-trash-can-outline" title="Bin" value="Bin"></v-list-item>
           </v-list>
         </v-navigation-drawer>
 
-        
         <v-main class="main">
-    <v-container  class="">
-      <v-row justify="center">
-        <v-col cols="6">
-          <NewNote/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" md="6" lg="4" sm="1">
-          <v-card>
-            <v-card-title>demo</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero, sint molestiae nesciunt, exercitationem quam voluptatem sequi cum corporis.</v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
-
+          <v-container class="">
+            <v-row justify="center">
+              <v-col cols="6">
+                <NewNote />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                   tae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6" lg="4" sm="1">
+                <v-card>
+                  <v-card-title>demo</v-card-title>
+                  <v-card-text
+                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero veritatis
+                    doloremque ut voluptatem ipsam velit reiciendis, eos asperiores molestiae vel
+                    dolore unde repudiandae itaque, cupiditate fugit nesciunt quia ea eveniet
+                    corporis culpa. Nemo dolorem inventore neque magnam doloribus ab beatae libero,
+                    sint molestiae nesciunt, exercitationem quam voluptatem sequi cum
+                    corporis.</v-card-text
+                  >
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-main>
       </div>
     </v-layout>
   </v-card>
 </template>
 
 <style>
-.main{
-    width:100vw;
-  }
+.main {
+  width: 100vw;
+}
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,
@@ -206,5 +264,6 @@ export default {
 }
 .v-list-item--active > .v-list-item__overlay {
   color: orange !important;
+  border-radius:  0px 18px 18px 0px;
 }
 </style>
