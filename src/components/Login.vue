@@ -34,7 +34,7 @@ export default {
         if (valid) {
           const obj = { email: this.email, password: this.password }
           login(obj)
-            .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data)))
+            .then((data) => localStorage.setItem('API_KEY', JSON.stringify(data.data.id)))
             .then(() => this.showSnackbar('Login Successful', 3000))
             .catch(() => this.showSnackbar('Login Failed. Please try again.', 3000))
         }

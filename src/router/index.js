@@ -28,7 +28,7 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../components/SideBar.vue')
+      component: () => import('../components/DashBoard.vue')
     },
     {
       path: '/newnote',
