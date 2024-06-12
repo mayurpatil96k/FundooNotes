@@ -1,25 +1,27 @@
 <script>
 import NewNote from './NewNote.vue'
-import Icon from './Icon.vue';
-import Card from './Card.vue';
+import Icon from './Icon.vue'
+import Card from './Card.vue'
+import { getAllNotes } from './services/Notes'
 
 export default {
   components: {
     NewNote,
     Icon,
-    Card,
+    Card
   },
   data: () => ({
     drawer: true,
     group: null,
-    rail: true
+    rail: true,
+
   }),
 
   watch: {
     group() {
       this.drawer = true
     }
-  }
+  },
 }
 </script>
 
@@ -117,7 +119,6 @@ export default {
           <v-divdider></v-divdider>
 
           <v-list density="compact" nav>
-            
             <v-list-item
               prepend-icon="mdi-lightbulb-outline"
               title="Notes"
@@ -128,13 +129,21 @@ export default {
               title="Reminders"
               value="Reminders"
             ></v-list-item>
-            <v-list-item prepend-icon="mdi-pencil" title="Edit Label" value="Edit Label"></v-list-item>
-            <v-list-item prepend-icon="mdi-archive-arrow-down-outline" title="Archieve" value="Archieve"></v-list-item>
+            <v-list-item
+              prepend-icon="mdi-pencil"
+              title="Edit Label"
+              value="Edit Label"
+            ></v-list-item>
+            <v-list-item
+              prepend-icon="mdi-archive-arrow-down-outline"
+              title="Archieve"
+              value="Archieve"
+            ></v-list-item>
             <v-list-item prepend-icon="mdi-trash-can-outline" title="Bin" value="Bin"></v-list-item>
           </v-list>
         </v-navigation-drawer>
 
-        <RouterView/>
+        <RouterView />
       </div>
     </v-layout>
   </v-card>
@@ -153,6 +162,6 @@ export default {
 }
 .v-list-item--active > .v-list-item__overlay {
   color: orange !important;
-  border-radius:  0px 18px 18px 0px;
+  border-radius: 0px 18px 18px 0px;
 }
 </style>

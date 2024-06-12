@@ -31,7 +31,7 @@ const router = createRouter({
       children: [{
         path: '/dashboard/notes',
         name: 'notes',
-        component: () => import('../components/Card.vue')
+        component: () => import('../components/Notes.vue')
       }]
     },
     {

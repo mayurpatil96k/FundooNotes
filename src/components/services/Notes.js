@@ -1,12 +1,12 @@
-import { post } from './Axios'
+import { Get } from './Axios'
 
+const key = localStorage.getItem("API_KEY");
+const trimmedStr = key.replace(/^"+|"+$/g, '');
 const headers = {
-    'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': trimmedStr
+};
 
-  }
-  
 export const getAllNotes = () => {
-  console.log('In Service Layer...')
-  console.log(signdata)
-  return post('user/userSignUp', signdata, headers)
-}
+  return Get('notes/getNotesList', { headers });
+};
