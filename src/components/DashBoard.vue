@@ -13,15 +13,14 @@ export default {
   data: () => ({
     drawer: true,
     group: null,
-    rail: true,
-
+    rail: true
   }),
 
   watch: {
     group() {
       this.drawer = true
     }
-  },
+  }
 }
 </script>
 
@@ -36,18 +35,16 @@ export default {
           alt="Loading..."
         />
         <v-toolbar-title>Fundoo</v-toolbar-title>
-
-        <v-text-field
-          v-model="search"
-          density="compact"
-          label="Search"
-          class="w-50"
-          prepend-inner-icon="mdi-magnify"
-          variant="outlined"
-          hide-details
-          single-line
-        ></v-text-field>
-
+        <div class="w-50">
+          <v-text-field
+            density="compact"
+            label="Search"
+            prepend-inner-icon="mdi-magnify"
+            variant="outlined"
+            hide-details
+            single-line
+          ></v-text-field>
+        </div>
         <v-spacer></v-spacer>
 
         <template v-if="$vuetify.display.mdAndUp">

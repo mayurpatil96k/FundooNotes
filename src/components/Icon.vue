@@ -14,4 +14,7 @@
      min-width: 0px;
      padding: 0 13px;
 }
+.v-btn .v-btn__underlay:hover{
+    
+}
 </style>

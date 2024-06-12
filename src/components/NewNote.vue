@@ -2,11 +2,21 @@
   <div class="u-border">
     <div @click="toggleContent">
       <v-text-field
-        label="Title"
+        placeholder="Title"
         density="compact"
         variant="flat"
         single-line
-      ></v-text-field>
+      >
+        <template v-if="showContent" v-slot:append-inner>
+          <v-icon class="mx-2">mdi-pin</v-icon>
+          </template>
+          <template v-else v-slot:append-inner>
+            <v-icon class="mx-2">mdi-tooltip-check-outline</v-icon>
+            <v-icon class="mx-2">mdi-brush</v-icon>
+            <v-icon class="mx-2">mdi-image</v-icon>
+          
+        </template>
+      </v-text-field>
     </div>
     <div v-if="showContent">
       <v-textarea
@@ -20,7 +30,7 @@
         <div class="u-icon-left">
           <icon/>
         </div>
-        <v-btn @click="hideContent" variant="plain" class="ml-auto">Close</v-btn>
+        <v-btn  @click="hideContent" variant="plain" class="text-none ml-auto">Close</v-btn>
       </div>
     </div>
   </div>
@@ -71,5 +81,9 @@ export default {
 .u-border {
   border: 1px solid #ccc;
   border-radius: 8px;
+}
+
+.v-icon {
+  cursor: pointer;
 }
 </style>

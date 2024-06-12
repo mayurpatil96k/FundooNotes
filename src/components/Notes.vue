@@ -49,5 +49,6 @@ export default {
 <style>
 .main {
   width: 100vw;
+  height: 100vw;
 }
 </style>

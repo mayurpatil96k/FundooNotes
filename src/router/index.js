@@ -54,7 +54,7 @@ router.beforeEach(async (to, from) => {
   }
   if (isAuthenticated && (to.name == 'Login' || to.name == 'signup')) {
     console.log(to.path)
-    return { name: 'dashboard' }
+    return { name: 'notes' }
   }
 })
 
