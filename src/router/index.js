@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       component: () => import('../components/Login.vue')
     },
     {
@@ -28,7 +27,12 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../components/DashBoard.vue')
+      component: () => import('../components/DashBoard.vue'),
+      children: [{
+        path: '/dashboard/notes',
+        name: 'notes',
+        component: () => import('../components/Card.vue')
+      }]
     },
     {
       path: '/newnote',
@@ -41,6 +45,17 @@ const router = createRouter({
       component: () => import('../components/Login.vue')
     }
   ]
+})
+router.beforeEach(async (to, from) => {
+  const isAuthenticated = localStorage.getItem('API_KEY')
+  if (!isAuthenticated && to.name !== 'Login' && to.name !== 'signup') {
+    console.log(to.path)
+    return { name: 'Login' }
+  }
+  if (isAuthenticated && (to.name == 'Login' || to.name == 'signup')) {
+    console.log(to.path)
+    return { name: 'dashboard' }
+  }
 })
 
 export default router

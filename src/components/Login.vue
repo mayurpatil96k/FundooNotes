@@ -108,9 +108,7 @@ export default {
 
       <div class="d-flex">
         <router-link to="signup"
-          ><a href="http://" target="_blank" rel="noopener noreferrer"
-            >Create Account</a
-          ></router-link
+          >Create Account</router-link
         >
 
         <v-btn
