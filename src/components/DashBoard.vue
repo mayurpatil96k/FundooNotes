@@ -37,6 +37,7 @@ export default {
         <v-toolbar-title>Fundoo</v-toolbar-title>
         <div class="w-50">
           <v-text-field
+          class="w-75"
             density="compact"
             label="Search"
             prepend-inner-icon="mdi-magnify"

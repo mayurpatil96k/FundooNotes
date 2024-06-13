@@ -19,9 +19,12 @@ export default {
     getNotes() {
       getAllNotes()
         .then((data) => {
-          this.obj = data.data.data.data
+          this.obj = data.data.data.data.reverse();
         })
         .catch((err) => console.log(err))
+    },
+    refresh(){
+      this.getNotes(); 
     }
   },
 
@@ -36,7 +39,7 @@ export default {
     <v-container class="">
       <v-row justify="center">
         <v-col cols="7">
-          <NewNote />
+          <NewNote @refreshNotes="refresh"/>
         </v-col>
       </v-row>
       <v-row>
@@ -49,6 +52,6 @@ export default {
 <style>
 .main {
   width: 100vw;
-  height: 100vw;
+  min-height: 45vw;
 }
 </style>

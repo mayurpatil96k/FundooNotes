@@ -1,7 +1,45 @@
+<script>
+import Icon from './Icon.vue'
+import { createNote } from '../components/services/Notes'
+
+export default {
+  components: {
+    Icon
+  },
+  data: () => ({
+    showContent: false,
+    title: '',
+    desc: ''
+  }),
+  methods: {
+    toggleContent() {
+      this.showContent = true
+    },
+    hideContent() {
+      this.showContent = false
+      if (this.desc.length > 0 && this.title.length > 0) {
+        const note = {
+          title: this.title,
+          description: this.desc
+        }
+        createNote(note);
+        this.$emit('refreshNotes')
+        this.title = ''
+        this.desc = ''
+      }
+    },
+    addNote() {
+      // createNote()
+    }
+  }
+}
+</script>
+
 <template>
   <div class="u-border">
     <div @click="toggleContent">
       <v-text-field
+        v-model="title"
         placeholder="Title"
         density="compact"
         variant="flat"
@@ -9,55 +47,32 @@
       >
         <template v-if="showContent" v-slot:append-inner>
           <v-icon class="mx-2">mdi-pin</v-icon>
-          </template>
-          <template v-else v-slot:append-inner>
-            <v-icon class="mx-2">mdi-tooltip-check-outline</v-icon>
-            <v-icon class="mx-2">mdi-brush</v-icon>
-            <v-icon class="mx-2">mdi-image</v-icon>
-          
+        </template>
+        <template v-else v-slot:append-inner>
+          <v-icon class="mx-2">mdi-tooltip-check-outline</v-icon>
+          <v-icon class="mx-2">mdi-brush</v-icon>
+          <v-icon class="mx-2">mdi-image</v-icon>
         </template>
       </v-text-field>
     </div>
     <div v-if="showContent">
       <v-textarea
+        v-model="desc"
         rows="1"
-        label="Take a note..."
+        placeholder="Take a note..."
         density="compact"
         variant="flat"
         single-line
       ></v-textarea>
       <div style="margin-top: 20px" class="d-flex u-align-center">
         <div class="u-icon-left">
-          <icon/>
+          <icon />
         </div>
-        <v-btn  @click="hideContent" variant="plain" class="text-none ml-auto">Close</v-btn>
+        <v-btn @click="hideContent" variant="plain" class="text-none ml-auto">Close</v-btn>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import Icon from './Icon.vue';
-
-export default {
-  components: {
-    Icon,
-  },
-  data() {
-    return {
-      showContent: false,
-    };
-  },
-  methods: {
-    toggleContent() {
-      this.showContent = true;
-    },
-    hideContent() {
-      this.showContent = false;
-    },
-  },
-};
-</script>
 
 <style>
 .u-card {
