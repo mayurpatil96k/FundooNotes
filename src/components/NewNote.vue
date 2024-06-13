@@ -9,7 +9,12 @@ export default {
   data: () => ({
     showContent: false,
     title: '',
-    desc: ''
+    desc: '',
+    items: [
+        { title: 'Add Label' },
+        { title: 'Add Drawing' },
+        { title: 'Show tick boxes' },
+      ]
   }),
   methods: {
     toggleContent() {
@@ -28,9 +33,6 @@ export default {
         this.desc = ''
       }
     },
-    addNote() {
-      // createNote()
-    }
   }
 }
 </script>
@@ -66,7 +68,7 @@ export default {
       ></v-textarea>
       <div style="margin-top: 20px" class="d-flex u-align-center">
         <div class="u-icon-left">
-          <icon />
+          <icon :items="this.items"/>
         </div>
         <v-btn @click="hideContent" variant="plain" class="text-none ml-auto">Close</v-btn>
       </div>

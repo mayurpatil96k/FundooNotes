@@ -11,16 +11,25 @@ export default {
   props: {
     obj: Array,
   },
+  data: () => ({
+    items: [
+        { title: 'Delete note' },
+        { title: 'Add Label' },
+        { title: 'Add drawwing' },
+        { title: 'make a copy' },
+        { title: 'Show tick boxes' },
+        { title: 'Copy to google docs' },
+        { title: 'Version History' },
+      ],
+  }),
   setup(props) {
-    // Setup a reactive property to track hover states
+
     const hoverIndex = ref(null);
 
-    // Function to set hover index
     const onHover = (index) => {
       hoverIndex.value = index;
     };
 
-    // Function to clear hover index
     const onLeave = () => {
       hoverIndex.value = null;
     };
@@ -39,7 +48,7 @@ export default {
     </div>
       <v-card-text>{{ item.description }}</v-card-text>
       <div class="CardIcons" :class="{ 'show': hoverIndex === index }">
-        <Icon />
+        <Icon :items="this.items" :obj="item.id"/>
       </div>
     </v-card>
 
@@ -59,4 +68,5 @@ export default {
   position: absolute;
   right: 0px;
 }
+
 </style>

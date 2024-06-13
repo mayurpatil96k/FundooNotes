@@ -20,3 +20,12 @@ export const createNote = (note) => {
   return post('notes/addNotes',note, { headers })
 }
 
+export const deleteNote = (note)=>{
+  const key = localStorage.getItem('API_KEY')
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: key
+  }
+  console.log("Removinng Notes...")
+  return post('notes/addNotes',note, { headers })
+}
