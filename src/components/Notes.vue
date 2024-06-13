@@ -19,11 +19,14 @@ export default {
     getNotes() {
       getAllNotes()
         .then((data) => {
-          this.obj = data.data.data.data.reverse();
+          
+          this.obj = data.data.data.data.reverse().filter((val)=>val.isDeleted === false);
+
         })
         .catch((err) => console.log(err))
     },
     refresh(){
+      console.log("refreshing...")
       this.getNotes(); 
     }
   },
@@ -43,7 +46,7 @@ export default {
         </v-col>
       </v-row>
       <v-row>
-        <Card :obj="this.obj" />
+        <Card @refreshing="refresh" :obj="this.obj" />
       </v-row>
     </v-container>
   </v-main>

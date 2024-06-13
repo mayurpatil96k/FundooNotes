@@ -11,6 +11,11 @@ export default {
   props: {
     obj: Array,
   },
+  methods:{
+    delrefresh(){
+      this.$emit("refreshing")
+    }
+  },
   data: () => ({
     items: [
         { title: 'Delete note' },
@@ -48,7 +53,7 @@ export default {
     </div>
       <v-card-text>{{ item.description }}</v-card-text>
       <div class="CardIcons" :class="{ 'show': hoverIndex === index }">
-        <Icon :items="this.items" :obj="item.id"/>
+        <Icon @refresh="delrefresh" :items="this.items" :obj="item.id"/>
       </div>
     </v-card>
 

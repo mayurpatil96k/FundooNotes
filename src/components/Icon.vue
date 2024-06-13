@@ -1,15 +1,22 @@
 <script>
-import {deleteNote} from '../components/services/Notes'
+import { deleteNote } from '../components/services/Notes'
 export default {
   props: {
     items: Array,
-    obj: String,
+    obj: String
   },
   methods: {
     delNote(index) {
-      console.log(index);
+      if(index=="Delete note"){
+      console.log(index)
       console.log(this.obj)
-      
+      const del = {
+        noteIdList: [this.obj],
+        isDeleted: true
+      }
+      deleteNote(del);
+      this.$emit("refresh")
+    }
     }
   }
 }

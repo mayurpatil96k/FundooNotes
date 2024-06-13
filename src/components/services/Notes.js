@@ -27,5 +27,5 @@ export const deleteNote = (note)=>{
     Authorization: key
   }
   console.log("Removinng Notes...")
-  return post('notes/addNotes',note, { headers })
+  return post('notes/trashNotes',note, { headers })
 }
