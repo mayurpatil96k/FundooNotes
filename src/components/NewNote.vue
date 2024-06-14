@@ -38,6 +38,7 @@ export default {
 </script>
 
 <template>
+  
   <div class="u-border">
     <div @click="toggleContent">
       <v-text-field
