@@ -12,7 +12,7 @@ export default {
     Icon,
     UpdateNote,
     MasonryWall,
-    VProgressCircular // Register the loader component
+    VProgressCircular 
   },
   props: {
     obj: {
@@ -20,7 +20,26 @@ export default {
       default: () => []
     }
   },
+  data: () => ({
+    dialog: false,
+    selectedNote: null,
+    iconitems: [
+      { title: 'Delete note' },
+      { title: 'Add Label' },
+      { title: 'Add drawing' },
+      { title: 'make a copy' },
+      { title: 'Show tick boxes' },
+      { title: 'Copy to google docs' },
+      { title: 'Version History' }
+    ]
+  }),
+  methods:{
+    delrefresh(){
+      this.$emit("refreshing");
+    }
+  },
   setup(props) {
+    
     // Setup reactive properties
     const hoverIndex = ref(null)
     const isLoading = ref(true)
@@ -69,7 +88,7 @@ export default {
     <v-progress-circular :size="100" :width="7" color="green" indeterminate> <b>Loading...</b> </v-progress-circular>
   </div>
   <div v-else-if="obj && obj.length">
-    <masonry-wall :items="obj" :ssr-columns="1" :column-width="200" :gap="0">
+    <masonry-wall :items="obj" :ssr-columns="1" :column-width="250" :gap="0">
       <template #default="{ item, index }">
         <v-col cols="" :key="index">
           <v-card class="border-sm" @mouseover="onHover(index)" @mouseleave="onLeave" @click="openDialog(item)">
@@ -84,7 +103,7 @@ export default {
             </div>
             <v-card-text>{{ item.description }}</v-card-text>
             <div class="CardIcons" :class="{ show: hoverIndex === index }">
-              <Icon @refresh="delrefresh" :items="this.items" :obj="item.id" />
+              <Icon @refresh="delrefresh" :items="this.iconitems" :obj="item.id" />
             </div>
           </v-card>
         </v-col>
