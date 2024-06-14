@@ -20,7 +20,7 @@ export default {
       getAllNotes()
         .then((data) => {
           
-          this.obj = data.data.data.data.reverse().filter((val)=>val.isDeleted === false);
+          this.obj = data.data.data.data.reverse().filter((val)=>(val.isDeleted === false && val.isArchived === false));
 
         })
         .catch((err) => console.log(err))

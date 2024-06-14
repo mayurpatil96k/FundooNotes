@@ -1,5 +1,5 @@
 <script>
-import { deleteNote } from '../components/services/Notes'
+import { deleteNote,arcNote } from '../components/services/Notes'
 export default {
   props: {
     items: Array,
@@ -17,6 +17,14 @@ export default {
       deleteNote(del);
       this.$emit("refresh")
     }
+    },
+    arcNote(){
+      const arc = {
+        noteIdList: [this.obj],
+        isArchived: true
+      }
+      arcNote(arc);
+      this.$emit("refresh")
     }
   }
 }
@@ -80,6 +88,7 @@ export default {
     ></v-btn>
     <v-btn variant="plain"
       ><svg
+        @click="arcNote()"
         xmlns="http://www.w3.org/2000/svg"
         height="18px"
         viewBox="0 -960 960 960"

@@ -30,6 +30,10 @@ export default {
     ]
   }),
   methods: {
+    delrefresh(){
+      this.$emit("closeevent");
+      this.$emit("uprefresh");
+    },
     closebox() {
       const updated = {
         noteId : this.c_title.id,
@@ -70,7 +74,7 @@ export default {
       ></v-textarea>
       <div style="margin-top: 20px" class="d-flex u-align-center">
         <div class="u-icon-left">
-          <icon :items="this.items" />
+          <icon :items="this.items" @refresh="delrefresh" :obj="this.c_title.id" />
         </div>
         <v-btn @click="closebox" variant="plain" class="text-none ml-auto">Close</v-btn>
       </div>

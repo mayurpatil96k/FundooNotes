@@ -12,7 +12,7 @@ export default {
     Icon,
     UpdateNote,
     MasonryWall,
-    VProgressCircular 
+    VProgressCircular
   },
   props: {
     obj: {
@@ -33,16 +33,15 @@ export default {
       { title: 'Version History' }
     ]
   }),
-  methods:{
-    delrefresh(){
-      this.$emit("refreshing");
+  methods: {
+    delrefresh() {
+      this.$emit('refreshing')
     },
-    uprefreshing(){
-      this.$emit("refreshing");
+    uprefreshing() {
+      this.$emit('refreshing')
     }
   },
   setup(props) {
-    
     // Setup reactive properties
     const hoverIndex = ref(null)
     const isLoading = ref(true)
@@ -73,9 +72,8 @@ export default {
       dialog.value = true
     }
 
-
     const close = () => {
-      dialog.value = false;
+      dialog.value = false
     }
 
     return { hoverIndex, onHover, onLeave, isLoading, dialog, selectedNote, openDialog, close }
@@ -85,28 +83,48 @@ export default {
 
 <template>
   <div v-if="isLoading" class="loader-container">
-    <v-progress-circular :size="100" :width="7" color="green" indeterminate> <b>Loading...</b> </v-progress-circular>
+    <v-progress-circular :size="100" :width="7" color="green" indeterminate>
+      <b>Loading...</b>
+    </v-progress-circular>
   </div>
   <div v-else-if="obj && obj.length">
-    <masonry-wall :items="obj" :ssr-columns="1" :column-width="250" :gap="0">
+    <masonry-wall :items="obj" :ssr-columns="1" :column-width="250" :gap="6">
       <template #default="{ item, index }">
-        <v-col cols="" :key="index">
-          <v-card class="border-sm" @mouseover="onHover(index)" @mouseleave="onLeave" @click="openDialog(item)">
-            <div class="d-flex position-relative">
-              <v-card-title> {{ item.title }} </v-card-title>
-              <v-btn class="u-align CardIcons" :class="{ show: hoverIndex === index }" variant="plain">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
-                  <path
-                    d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z" />
-                </svg>
-              </v-btn>
-            </div>
-            <v-card-text>{{ item.description }}</v-card-text>
-            <div class="CardIcons" :class="{ show: hoverIndex === index }">
-              <Icon @refresh="delrefresh" :items="this.iconitems" :obj="item.id" />
-            </div>
-          </v-card>
-        </v-col>
+        <v-card
+          class="border-sm"
+          @mouseover="onHover(index)"
+          @mouseleave="onLeave"
+          
+        >
+        <div @click="openDialog(item)">
+          <div class="d-flex position-relative">
+            <v-card-title style="text-overflow: ellipsis; width: 100%">
+              {{ item.title }}
+            </v-card-title>
+            <v-btn
+              class="u-align CardIcons"
+              :class="{ show: hoverIndex === index }"
+              variant="plain"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#000000"
+              >
+                <path
+                  d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"
+                />
+              </svg>
+            </v-btn>
+          </div>
+          <v-card-text>{{ item.description }}</v-card-text>
+        </div>
+          <div class="CardIcons" :class="{ show: hoverIndex === index }">
+            <Icon @refresh="delrefresh" :items="this.iconitems" :obj="item.id" />
+          </div>
+        </v-card>
       </template>
     </masonry-wall>
   </div>
@@ -120,6 +138,9 @@ export default {
 </template>
 
 <style scoped>
+.masonry-wall {
+  margin-top: 20px;
+}
 .loader-container {
   display: flex;
   justify-content: center;
@@ -144,7 +165,7 @@ export default {
   position: absolute;
   right: 0px;
 }
-.v-col{
+.v-col {
   padding: 5px !important;
 }
 </style>

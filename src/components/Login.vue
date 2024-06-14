@@ -37,7 +37,7 @@ export default {
             .then((data) => localStorage.setItem('API_KEY', data.data.id))
             .then(() => {
               this.showSnackbar('Login Successful', 2000)
-              setTimeout(()=>this.$router.push('/dashboard/notes'),2000)
+              setTimeout(()=>this.$router.push('/dashboard/notes'),1000)
               
             })
             .catch(() => this.showSnackbar('Login Failed. Please try again.', 3000))
