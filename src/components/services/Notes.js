@@ -29,3 +29,14 @@ export const deleteNote = (note)=>{
   console.log("Removinng Notes...")
   return post('notes/trashNotes',note, { headers })
 }
+
+export const updateNote = (note)=>{
+  const key = localStorage.getItem('API_KEY')
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: key
+  }
+  console.log("updating Note...")
+  return post('notes/updateNotes',note, { headers })
+}
+

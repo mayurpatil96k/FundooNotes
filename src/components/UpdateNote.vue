@@ -1,13 +1,12 @@
 <script>
 import Icon from './Icon.vue'
-import { createNote } from '../components/services/Notes'
+import { updateNote } from '../components/services/Notes'
 
 export default {
   components: {
     Icon
   },
   mounted() {
-    console.log(this.c_title)
     this.title = this.c_title.title
     this.desc = this.c_title.description
   },
@@ -32,8 +31,15 @@ export default {
   }),
   methods: {
     closebox() {
+      const updated = {
+        noteId : this.c_title.id,
+        title : this.title,
+        description : this.desc
+      }
+      updateNote(updated);
       this.$emit('closeevent')
-      console.log(this.c_title)
+      this.$emit("uprefresh");
+      console.log(updated);
     }
   }
 }

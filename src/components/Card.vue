@@ -36,6 +36,9 @@ export default {
   methods:{
     delrefresh(){
       this.$emit("refreshing");
+    },
+    uprefreshing(){
+      this.$emit("refreshing");
     }
   },
   setup(props) {
@@ -57,25 +60,22 @@ export default {
       { immediate: true }
     )
 
-    // Function to set hover index
     const onHover = (index) => {
       hoverIndex.value = index
     }
 
-    // Function to clear hover index
     const onLeave = () => {
       hoverIndex.value = null
     }
 
-    // Function to open the dialog with the selected note
     const openDialog = (note) => {
       selectedNote.value = note
       dialog.value = true
     }
 
-    // Function to close the dialog
+
     const close = () => {
-      dialog.value = false
+      dialog.value = false;
     }
 
     return { hoverIndex, onHover, onLeave, isLoading, dialog, selectedNote, openDialog, close }
@@ -115,7 +115,7 @@ export default {
   </div>
 
   <v-dialog v-model="dialog" max-width="600">
-    <UpdateNote :c_title="selectedNote" @closeevent="close" />
+    <UpdateNote :c_title="selectedNote" @uprefresh="uprefreshing" @closeevent="close" />
   </v-dialog>
 </template>
 
