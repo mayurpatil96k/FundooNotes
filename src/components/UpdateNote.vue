@@ -6,42 +6,42 @@ export default {
   components: {
     Icon
   },
+  mounted() {
+    console.log(this.c_title)
+    this.title = this.c_title.title
+    this.desc = this.c_title.description
+  },
+  props: {
+    c_title: Object
+  },
+
   data: () => ({
-    showContent: false,
+    showContent: true,
+    dialog: false,
     title: '',
     desc: '',
     items: [
-        { title: 'Add Label' },
-        { title: 'Add Drawing' },
-        { title: 'Show tick boxes' },
-      ]
+      { title: 'Delete note' },
+      { title: 'Add Label' },
+      { title: 'Add drawwing' },
+      { title: 'make a copy' },
+      { title: 'Show tick boxes' },
+      { title: 'Copy to google docs' },
+      { title: 'Version History' }
+    ]
   }),
   methods: {
-    toggleContent() {
-      this.showContent = true
-    },
-    hideContent() {
-      this.showContent = false
-      if (this.desc.length > 0 && this.title.length > 0) {
-        const note = {
-          title: this.title,
-          description: this.desc
-        }
-        createNote(note);
-        this.$emit('refreshNotes')
-        this.title = ''
-        this.desc = ''
-      }
-    },
+    closebox() {
+      this.$emit('closeevent')
+      console.log(this.c_title)
+    }
   }
 }
 </script>
 
 <template>
-  
-  <div class="u-border">
+  <div class="u-border man-bg">
     <div @click="toggleContent">
-     
       <v-textarea auto-grow
         v-model="title"
         rows="1"
@@ -49,17 +49,12 @@ export default {
         density="compact"
         variant="flat"
       >
-        <template v-if="showContent" v-slot:append-inner>
+        <template v-slot:append-inner>
           <v-icon class="mx-2">mdi-pin</v-icon>
-        </template>
-        <template v-else v-slot:append-inner>
-          <v-icon class="mx-2">mdi-tooltip-check-outline</v-icon>
-          <v-icon class="mx-2">mdi-brush</v-icon>
-          <v-icon class="mx-2">mdi-image</v-icon>
         </template>
       </v-textarea>
     </div>
-    <div v-if="showContent">
+    <div>
       <v-textarea auto-grow
         v-model="desc"
         rows="1"
@@ -69,18 +64,23 @@ export default {
       ></v-textarea>
       <div style="margin-top: 20px" class="d-flex u-align-center">
         <div class="u-icon-left">
-          <icon :items="this.items"/>
+          <icon :items="this.items" />
         </div>
-        <v-btn @click="hideContent" variant="plain" class="text-none ml-auto">Close</v-btn>
+        <v-btn @click="closebox" variant="plain" class="text-none ml-auto">Close</v-btn>
       </div>
     </div>
   </div>
 </template>
 
 <style>
+.man-bg {
+  background: #ffff !important;
+}
+
 .u-card {
   width: 650px !important;
-  min-height: 150px !important;
+  height: 150px !important;
+  background: #ffff;
 }
 
 .v-input__details {

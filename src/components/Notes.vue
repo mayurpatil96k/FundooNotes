@@ -45,16 +45,18 @@ export default {
           <NewNote @refreshNotes="refresh"/>
         </v-col>
       </v-row>
-      <v-row>
+      <v-col >
         <Card @refreshing="refresh" :obj="this.obj" />
-      </v-row>
+      </v-col>
     </v-container>
   </v-main>
 </template>
 
 <style>
+
 .main {
   width: 100vw;
   min-height: 45vw;
 }
+
 </style>

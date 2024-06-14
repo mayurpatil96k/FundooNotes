@@ -106,7 +106,7 @@ export default {
         </v-avatar>
       </v-app-bar>
 
-      <div class="d-flex">
+      <div class="d-flex ">
         <v-navigation-drawer
           expand-on-hover
           v-model="drawer"
@@ -162,4 +162,5 @@ export default {
   color: orange !important;
   border-radius: 0px 18px 18px 0px;
 }
+
 </style>
