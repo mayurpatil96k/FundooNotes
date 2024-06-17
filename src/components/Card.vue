@@ -42,13 +42,11 @@ export default {
     }
   },
   setup(props) {
-    // Setup reactive properties
     const hoverIndex = ref(null)
     const isLoading = ref(true)
     const dialog = ref(false)
     const selectedNote = ref(null)
 
-    // Watch the obj prop to determine when data is loaded
     watch(
       () => props.obj,
       (newObj) => {
@@ -90,8 +88,8 @@ export default {
   <div v-else-if="obj && obj.length">
     <masonry-wall :items="obj" :ssr-columns="1" :column-width="250" :gap="6">
       <template #default="{ item, index }">
-        <v-card
-          class="border-sm"
+        <v-card  
+          class="border-sm" :style="{backgroundColor: item.color}"
           @mouseover="onHover(index)"
           @mouseleave="onLeave"
           

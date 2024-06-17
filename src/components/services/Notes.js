@@ -49,3 +49,12 @@ export const updateNote = (note)=>{
   return post('notes/updateNotes',note, { headers })
 }
 
+export const changeColor = (color)=>{
+  const key = localStorage.getItem('API_KEY')
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: key
+  }
+  console.log("updating color...")
+  return post('/notes/changesColorNotes',color, { headers })
+}

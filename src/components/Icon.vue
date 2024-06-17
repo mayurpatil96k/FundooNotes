@@ -1,5 +1,5 @@
 <script>
-import { deleteNote,arcNote } from '../components/services/Notes'
+import { deleteNote, arcNote, changeColor } from '../components/services/Notes'
 export default {
   props: {
     items: Array,
@@ -7,24 +7,31 @@ export default {
   },
   methods: {
     delNote(index) {
-      if(index=="Delete note"){
-      console.log(index)
-      console.log(this.obj)
-      const del = {
-        noteIdList: [this.obj],
-        isDeleted: true
+      if (index == 'Delete note') {
+        const del = {
+          noteIdList: [this.obj],
+          isDeleted: true
+        }
+        deleteNote(del)
+        this.$emit('refresh')
       }
-      deleteNote(del);
-      this.$emit("refresh")
-    }
     },
-    arcNote(){
+    arcNote() {
       const arc = {
         noteIdList: [this.obj],
         isArchived: true
       }
-      arcNote(arc);
-      this.$emit("refresh")
+      arcNote(arc)
+      this.$emit('refresh')
+    },
+    colorNote(newcolor) {
+      const colorobj = {
+        noteIdList: [this.obj],
+        color: newcolor
+      }
+      console.log(colorobj)
+      changeColor(colorobj)
+      this.$emit('refresh')
     }
   }
 }
@@ -71,8 +78,20 @@ export default {
             /></svg
         ></v-btn>
       </template>
-
-      <v-color-picker></v-color-picker>
+      <div class="u-color">
+        <div class="color-box white" @click="colorNote('#ffffff')"></div>
+        <div class="color-box red" @click="colorNote('#fbbc05')"></div>
+        <div class="color-box orange" @click="colorNote('#ff7043')"></div>
+        <div class="color-box yellow" @click="colorNote('#fff475')"></div>
+        <div class="color-box green" @click="colorNote('#ccff90')"></div>
+        <div class="color-box teal" @click="colorNote('#a7ffeb')"></div>
+        <div class="color-box blue" @click="colorNote('#cbf0f8')"></div>
+        <div class="color-box dark-blue" @click="colorNote('#fdcfe8')"></div>
+        <div class="color-box purple" @click="colorNote('#d7aefb')"></div>
+        <div class="color-box pink" @click="colorNote('#aecbfa')"></div>
+        <div class="color-box brown" @click="colorNote('#e6c9a8')"></div>
+        <div class="color-box gray" @click="colorNote('#e8eaed')"></div>
+      </div>
     </v-menu>
     <v-btn variant="plain"
       ><svg
@@ -142,5 +161,59 @@ export default {
 }
 .v-list-item--density-compact.v-list-item--one-line {
   min-height: 27px !important;
+}
+.color-box {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin: 3px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.white {
+  background-color: #ffffff;
+}
+.red {
+  background-color: #fbbc05;
+}
+.orange {
+  background-color: #ff7043;
+}
+.yellow {
+  background-color: #fff475;
+}
+.green {
+  background-color: #ccff90;
+}
+.teal {
+  background-color: #a7ffeb;
+}
+.blue {
+  background-color: #cbf0f8;
+}
+.dark-blue {
+  background-color: #aecbfa;
+}
+.purple {
+  background-color: #d7aefb;
+}
+.pink {
+  background-color: #fdcfe8;
+}
+.brown {
+  background-color: #e6c9a8;
+}
+.gray {
+  background-color: #e8eaed;
+}
+#color-name {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.u-color {
+  border: 1px solid black;
+  border-radius: 5px;
 }
 </style>
