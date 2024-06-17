@@ -28,11 +28,23 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../components/DashBoard.vue'),
-      children: [{
-        path: '/dashboard/notes',
-        name: 'notes',
-        component: () => import('../components/Notes.vue')
-      }]
+      children: [
+        {
+          path: '/dashboard/notes',
+          name: 'notes',
+          component: () => import('../components/Notes.vue')
+        },
+        {
+          path: '/dashboard/archieve',
+          name: 'archieve',
+          component: () => import('../components/Archieve.vue')
+        },
+        {
+          path: '/dashboard/trash',
+          name: 'trash',
+          component: () => import('../components/TrashNotes.vue')
+        }
+      ]
     },
     {
       path: '/newnote',

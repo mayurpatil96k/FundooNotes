@@ -2,7 +2,7 @@
 import NewNote from './NewNote.vue'
 import Icon from './Icon.vue'
 import Card from './Card.vue'
-import { getAllNotes } from './services/Notes'
+import Archieve from './Archieve.vue'
 
 export default {
   components: {
@@ -117,11 +117,11 @@ export default {
           <v-divdider></v-divdider>
 
           <v-list density="compact" nav>
-            <v-list-item
+           <router-link to="/dashboard/notes"><v-list-item
               prepend-icon="mdi-lightbulb-outline"
               title="Notes"
               value="Notes"
-            ></v-list-item>
+            ></v-list-item></router-link> 
             <v-list-item
               prepend-icon="mdi-bell-outline"
               title="Reminders"
@@ -132,12 +132,12 @@ export default {
               title="Edit Label"
               value="Edit Label"
             ></v-list-item>
-            <v-list-item
+           <router-link to="/dashboard/archieve"> <v-list-item
               prepend-icon="mdi-archive-arrow-down-outline"
-              title="Archieve"
-              value="Archieve"
-            ></v-list-item>
-            <v-list-item prepend-icon="mdi-trash-can-outline" title="Bin" value="Bin"></v-list-item>
+              title="Archive"
+              value="Archive"
+            ></v-list-item></router-link>
+            <router-link to="/dashboard/trash"><v-list-item prepend-icon="mdi-trash-can-outline" title="Bin" value="Bin"></v-list-item></router-link>
           </v-list>
         </v-navigation-drawer>
 
@@ -161,6 +161,11 @@ export default {
 .v-list-item--active > .v-list-item__overlay {
   color: orange !important;
   border-radius: 0px 18px 18px 0px;
+}
+
+a  {
+    color: rgba(0, 0, 0, 0.884);
+    text-decoration: none;
 }
 
 </style>
