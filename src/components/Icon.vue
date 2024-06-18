@@ -162,9 +162,12 @@ export default {
 .v-list-item--density-compact.v-list-item--one-line {
   min-height: 27px !important;
 }
+.color-box:hover{
+  border: 2px solid white;
+}
 .color-box {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   display: inline-block;
   margin: 3px;
   border-radius: 50%;
@@ -175,7 +178,7 @@ export default {
   background-color: #ffffff;
 }
 .red {
-  background-color: #fbbc05;
+  background-color: #fba505;
 }
 .orange {
   background-color: #ff7043;

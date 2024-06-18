@@ -159,7 +159,7 @@ export default {
     'opsz' 24;
 }
 .v-list-item--active > .v-list-item__overlay {
-  color: orange !important;
+  color: rgb(254, 109, 6) !important;
   border-radius: 0px 18px 18px 0px;
 }
 

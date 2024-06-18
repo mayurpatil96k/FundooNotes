@@ -50,7 +50,7 @@ export default {
 </script>
 
 <template>
-  <div class="u-border man-bg">
+  <div :style="{backgroundColor : c_title.color}" class="u-border man-bg">
     <div @click="toggleContent">
       <v-textarea auto-grow
         v-model="title"
@@ -84,7 +84,7 @@ export default {
 
 <style>
 .man-bg {
-  background: #ffff !important;
+  background: #ffff ;
 }
 
 .u-card {

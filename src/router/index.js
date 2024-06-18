@@ -60,13 +60,13 @@ const router = createRouter({
 })
 router.beforeEach(async (to, from) => {
   const isAuthenticated = localStorage.getItem('API_KEY')
-  if (!isAuthenticated && to.name !== 'Login' && to.name !== 'signup') {
+  if (!isAuthenticated && to.name !== 'Login' && to.name !== 'signup' && to.name !== '') {
     console.log(to.path)
     return { name: 'Login' }
   }
-  if (isAuthenticated && (to.name == 'Login' || to.name == 'signup')) {
+  if (isAuthenticated && (to.name == 'Login' || to.name == 'signup' || to.name == 'index')) {
     console.log(to.path)
-    return { name: 'dashboard' }
+    return { name: 'notes' }
   }
 })
 

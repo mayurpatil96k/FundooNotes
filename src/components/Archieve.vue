@@ -20,7 +20,7 @@ export default {
       getAllArc()
         .then((data) => {
           
-          this.obj = data.data.data.data.reverse();
+          this.obj = data.data.data.data.reverse().filter((val)=>(val.isDeleted === false ));
 
         })
         .catch((err) => console.log(err))
