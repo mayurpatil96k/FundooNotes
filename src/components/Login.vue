@@ -34,11 +34,13 @@ export default {
         if (valid) {
           const obj = { email: this.email, password: this.password }
           login(obj)
-            .then((data) => localStorage.setItem('API_KEY', data.data.id))
+            .then((data) => {
+              localStorage.setItem('API_KEY', data.data.id)
+              localStorage.setItem('USER_ID', data.data.userId)
+            })
             .then(() => {
               this.showSnackbar('Login Successful', 2000)
-              setTimeout(()=>this.$router.push('/dashboard/notes'),1000)
-              
+              setTimeout(() => this.$router.push('/dashboard/notes'), 1000)
             })
             .catch(() => this.showSnackbar('Login Failed. Please try again.', 3000))
         }
@@ -107,9 +109,7 @@ export default {
       </div>
 
       <div class="d-flex">
-        <router-link to="signup"
-          >Create Account</router-link
-        >
+        <router-link to="signup">Create Account</router-link>
 
         <v-btn
           class="text-none"

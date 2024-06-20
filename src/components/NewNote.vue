@@ -40,6 +40,7 @@ export default {
 <template>
   
   <div class="u-border">
+    
     <div @click="toggleContent">
      
       <v-textarea auto-grow

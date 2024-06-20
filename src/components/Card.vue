@@ -88,6 +88,7 @@ export default {
   <div v-else-if="obj && obj.length">
     <masonry-wall :items="obj" :ssr-columns="1" :column-width="250" :gap="6">
       <template #default="{ item, index }">
+        
         <v-card  
           class="border-sm" :style="{backgroundColor: item.color}"
           @mouseover="onHover(index)"
