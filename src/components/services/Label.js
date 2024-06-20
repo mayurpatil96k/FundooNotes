@@ -1,4 +1,4 @@
-import { Get, post, Delete } from './Axios'
+import { Get, post, Delete ,Patch} from './Axios'
 
 export const getAllLabels = () => {
   const key = localStorage.getItem('API_KEY')
@@ -24,5 +24,14 @@ export const deleteLabels = (label) => {
     'Content-Type': 'application/json',
     Authorization: key
   }
-  return Delete('/noteLabels/'+label+'/deleteNoteLabel', { headers })
+  return Delete('noteLabels/'+label+'/deleteNoteLabel', { headers })
+}
+
+export const updateLabels = (id,data) => {
+  const key = localStorage.getItem('API_KEY')
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: key
+  }
+  return Patch(`noteLabels/${id}`, data, { headers })
 }

@@ -15,3 +15,7 @@ export const Delete = (url, headerConfig) => {
 export const Put = (url, data, headerConfig) => {
     return axios.put(BASE_URL + url, data, headerConfig);
 };
+
+export const Patch = (url, data, headerConfig) => {
+    return axios.patch(BASE_URL + url, data, headerConfig);
+};

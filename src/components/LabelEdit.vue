@@ -1,5 +1,5 @@
 <script>
-import { addLabels,deleteLabels } from './services/Label'
+import { addLabels, deleteLabels, updateLabels } from './services/Label'
 
 export default {
   data() {
@@ -23,24 +23,30 @@ export default {
       console.log('ticked...' + val)
       const userid = localStorage.getItem('USER_ID')
       const newlabel = {
-        "label": this.title,
-        "isDeleted":false,
-        "userId": userid
+        label: this.title,
+        isDeleted: false,
+        userId: userid
       }
       console.log(newlabel)
       addLabels(newlabel)
         .then((data) => console.log(data))
-        .catch((err) => console.log(err));
-      this.$emit('refreshLabel');
-      this.title ='';
+        .catch((err) => console.log(err))
+      this.$emit('refreshLabel')
+      this.title = ''
     },
-    editLabel(index) {
-      console.log('editing...' + index)
+    editLabel(id, label) {
+      const updateLabelData = {
+        label: label
+      }
+      updateLabels(id, updateLabelData)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
     },
-    deleteLabel(id){
-      console.log(id);
-      deleteLabels(id).then((data)=>console.log(data)).catch((err)=>console.log(err))
-      this.$emit('refreshLabel');
+    deleteLabel(id) {
+      deleteLabels(id)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
+      this.$emit('refreshLabel')
     }
   },
   props: {
@@ -74,7 +80,10 @@ export default {
       @mouseleave="hoverIndex = null"
     >
       <div class="pa-2 pb-2">
-        <v-icon @click="deleteLabel(item.id)" :icon="hoverIndex === index ? 'mdi-trash-can' : 'mdi-label'"></v-icon>
+        <v-icon
+          @click="deleteLabel(item.id)"
+          :icon="hoverIndex === index ? 'mdi-trash-can' : 'mdi-label'"
+        ></v-icon>
       </div>
       <v-text-field
         v-model="item.label"
@@ -85,7 +94,7 @@ export default {
       ></v-text-field>
       <div class="pa-2 pb-2">
         <v-icon
-          @click="editLabel(item.label)"
+          @click="editLabel(item.id, item.label)"
           :icon="editingIndex === index ? 'mdi-check' : 'mdi-pencil'"
         ></v-icon>
       </div>
@@ -101,6 +110,7 @@ export default {
 .u-card {
   width: 300px !important;
   min-height: 250px !important;
+  height: auto !important;
 }
 
 .v-dialog > .v-overlay__content > .v-card,
