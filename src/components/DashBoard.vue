@@ -23,7 +23,6 @@ export default {
         .catch((err) => console.log(err))
     },
     closeve(){
-      console.log("dashcl");
       this.dialog = false
     }
   },
@@ -187,7 +186,7 @@ export default {
 
   <!-- dialogue -->
   <v-dialog v-model="dialog" max-width="210" min-height="180px">
-    <LabelEdit :Ilabels="labels" @closevent="closeve"/>
+    <LabelEdit @refreshLabel="getLabel" :Ilabels="labels" @closevent="closeve"/>
   </v-dialog>
 </template>
 

@@ -1,20 +1,46 @@
 <script>
+import { addLabels,deleteLabels } from './services/Label'
+
 export default {
   data() {
     return {
       hoverIndex: null,
-      editingIndex: null
-    };
+      editingIndex: null,
+      title: ''
+    }
   },
   methods: {
     closeevent() {
       this.$emit('closevent')
     },
     startEditing(index) {
-      this.editingIndex = index;
+      this.editingIndex = index
     },
     stopEditing() {
-      this.editingIndex = null;
+      this.editingIndex = null
+    },
+    addNewLabel(val) {
+      console.log('ticked...' + val)
+      const userid = localStorage.getItem('USER_ID')
+      const newlabel = {
+        "label": this.title,
+        "isDeleted":false,
+        "userId": userid
+      }
+      console.log(newlabel)
+      addLabels(newlabel)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+      this.$emit('refreshLabel');
+      this.title ='';
+    },
+    editLabel(index) {
+      console.log('editing...' + index)
+    },
+    deleteLabel(id){
+      console.log(id);
+      deleteLabels(id).then((data)=>console.log(data)).catch((err)=>console.log(err))
+      this.$emit('refreshLabel');
     }
   },
   props: {
@@ -30,24 +56,25 @@ export default {
         <v-icon icon="mdi-window-close"></v-icon>
       </div>
       <v-text-field
+        v-model.trim="title"
         placeholder="Create new label"
         density="compact"
         variant="flat"
       ></v-text-field>
       <div class="pa-2 pb-2">
-        <v-icon icon="mdi-check"></v-icon>
+        <v-icon @click="addNewLabel(title)" icon="mdi-check"></v-icon>
       </div>
     </div>
     <!-- iterating... -->
-    <div 
-      v-for="(item, index) in Ilabels" 
-      :key="index" 
+    <div
+      v-for="(item, index) in Ilabels"
+      :key="index"
       class="d-flex"
       @mouseover="hoverIndex = index"
       @mouseleave="hoverIndex = null"
     >
       <div class="pa-2 pb-2">
-        <v-icon :icon="hoverIndex === index ? 'mdi-trash-can' : 'mdi-label'"></v-icon>
+        <v-icon @click="deleteLabel(item.id)" :icon="hoverIndex === index ? 'mdi-trash-can' : 'mdi-label'"></v-icon>
       </div>
       <v-text-field
         v-model="item.label"
@@ -57,7 +84,10 @@ export default {
         @blur="stopEditing"
       ></v-text-field>
       <div class="pa-2 pb-2">
-        <v-icon :icon="editingIndex === index ? 'mdi-check' : 'mdi-pencil'"></v-icon>
+        <v-icon
+          @click="editLabel(item.label)"
+          :icon="editingIndex === index ? 'mdi-check' : 'mdi-pencil'"
+        ></v-icon>
       </div>
     </div>
     <v-divider></v-divider>
