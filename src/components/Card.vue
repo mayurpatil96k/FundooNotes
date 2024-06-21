@@ -88,40 +88,48 @@ export default {
   <div v-else-if="obj && obj.length">
     <masonry-wall :items="obj" :ssr-columns="1" :column-width="250" :gap="6">
       <template #default="{ item, index }">
-        
-        <v-card  
-          class="border-sm" :style="{backgroundColor: item.color}"
+        <v-card
+          class="border-sm"
+          :style="{ backgroundColor: item.color }"
           @mouseover="onHover(index)"
           @mouseleave="onLeave"
-          
         >
-        <div @click="openDialog(item)">
-          <div class="d-flex position-relative">
-            <v-card-title style="text-overflow: ellipsis; width: 100%">
-              {{ item.title }}
-            </v-card-title>
-            <v-btn
-              class="u-align CardIcons"
-              :class="{ show: hoverIndex === index }"
-              variant="plain"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#000000"
+          <div @click="openDialog(item)">
+            <div class="d-flex position-relative">
+              <v-card-title style="text-overflow: ellipsis; width: 100%">
+                {{ item.title }}
+              </v-card-title>
+              <v-btn
+                class="u-align CardIcons"
+                :class="{ show: hoverIndex === index }"
+                variant="plain"
               >
-                <path
-                  d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"
-                />
-              </svg>
-            </v-btn>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#000000"
+                >
+                  <path
+                    d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"
+                  />
+                </svg>
+              </v-btn>
+            </div>
+            <v-card-text>{{ item.description }}</v-card-text>
+            <div class="d-flex flex-row u-margin" >
+              <v-chip class="u-margin" v-for="label in item.noteLabels" density="compact" variant="outlined" closable> {{ label.label }} </v-chip>
+            </div>
           </div>
-          <v-card-text>{{ item.description }}</v-card-text>
-        </div>
+
           <div class="CardIcons" :class="{ show: hoverIndex === index }">
-            <Icon @refresh="delrefresh" :items="this.iconitems" :obj="item.id" />
+            <Icon
+              @refresh="delrefresh"
+              :items="this.iconitems"
+              :obj="item.id"
+              :carddetails="item"
+            />
           </div>
         </v-card>
       </template>
@@ -150,7 +158,9 @@ export default {
   letter-spacing: 1.5px;
   font-size: 13px;
 }
-
+.u-margin{
+  margin-left: 7px;
+}
 .CardIcons {
   opacity: 0;
   transition: opacity 0.3s ease;

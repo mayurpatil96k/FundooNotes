@@ -1,9 +1,19 @@
 <script>
 import { deleteNote, arcNote, changeColor } from '../components/services/Notes'
+import AddLabel from './AddLabel.vue'
+
 export default {
+  components: {
+    AddLabel
+  },
+  data: () => ({
+    dialog: false,
+    selected: []
+  }),
   props: {
     items: Array,
-    obj: String
+    obj: String,
+    carddetails: Object
   },
   methods: {
     delNote(index) {
@@ -14,7 +24,13 @@ export default {
         }
         deleteNote(del)
         this.$emit('refresh')
+      } else if (index == 'Add Label') {
+        console.log('demo...')
+        this.dialog = true
       }
+    },
+    test(event) {
+      event.stopPropagation()
     },
     arcNote() {
       const arc = {
@@ -24,7 +40,16 @@ export default {
       arcNote(arc)
       this.$emit('refresh')
     },
-    colorNote(newcolor) {
+    handleItemClick(item) {
+      // Example logic to determine when to show the second menu
+      if (item.title === 'Label') {
+        this.showSecondMenu = true
+      } else {
+        this.showSecondMenu = false
+      }
+    },
+    colorNote(newcolor, event) {
+      event.stopPropagation()
       const colorobj = {
         noteIdList: [this.obj],
         color: newcolor
@@ -65,7 +90,7 @@ export default {
     ></v-btn>
     <v-menu>
       <template v-slot:activator="{ props }">
-        <v-btn variant="plain" v-bind="props"
+        <v-btn variant="plain" v-bind="props" @click.stop="test"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             height="18px"
@@ -79,18 +104,18 @@ export default {
         ></v-btn>
       </template>
       <div class="u-color">
-        <div class="color-box white" @click="colorNote('#ffffff')"></div>
-        <div class="color-box red" @click="colorNote('#fbbc05')"></div>
-        <div class="color-box orange" @click="colorNote('#ff7043')"></div>
-        <div class="color-box yellow" @click="colorNote('#fff475')"></div>
-        <div class="color-box green" @click="colorNote('#ccff90')"></div>
-        <div class="color-box teal" @click="colorNote('#a7ffeb')"></div>
-        <div class="color-box blue" @click="colorNote('#cbf0f8')"></div>
-        <div class="color-box dark-blue" @click="colorNote('#fdcfe8')"></div>
-        <div class="color-box purple" @click="colorNote('#d7aefb')"></div>
-        <div class="color-box pink" @click="colorNote('#aecbfa')"></div>
-        <div class="color-box brown" @click="colorNote('#e6c9a8')"></div>
-        <div class="color-box gray" @click="colorNote('#e8eaed')"></div>
+        <div class="color-box white" @click="colorNote('#ffffff', $event)"></div>
+        <div class="color-box red" @click="colorNote('#fbbc05', $event)"></div>
+        <div class="color-box orange" @click="colorNote('#ff7043', $event)"></div>
+        <div class="color-box yellow" @click="colorNote('#fff475', $event)"></div>
+        <div class="color-box green" @click="colorNote('#ccff90', $event)"></div>
+        <div class="color-box teal" @click="colorNote('#a7ffeb', $event)"></div>
+        <div class="color-box blue" @click="colorNote('#cbf0f8', $event)"></div>
+        <div class="color-box dark-blue" @click="colorNote('#fdcfe8', $event)"></div>
+        <div class="color-box purple" @click="colorNote('#d7aefb', $event)"></div>
+        <div class="color-box pink" @click="colorNote('#aecbfa', $event)"></div>
+        <div class="color-box brown" @click="colorNote('#e6c9a8', $event)"></div>
+        <div class="color-box gray" @click="colorNote('#e8eaed', $event)"></div>
       </div>
     </v-menu>
     <v-btn variant="plain"
@@ -146,15 +171,20 @@ export default {
         >
           <v-list-item-title size="small" density="compact" v-text="item.title"></v-list-item-title>
         </v-list-item>
+
+        <!-- add label logic here -->
       </v-list>
     </v-menu>
+    <v-dialog v-model="dialog" max-width="210" min-height="180px">
+      <AddLabel :card="carddetails " :cardId="obj" :items="items" />
+    </v-dialog>
   </div>
 </template>
 
 <style>
 .v-btn--size-default {
   min-width: 0px;
-  padding: 0 13px;
+  padding: 0 14px;
 }
 .v-list-item-title {
   font-size: 0.9rem;
@@ -162,7 +192,7 @@ export default {
 .v-list-item--density-compact.v-list-item--one-line {
   min-height: 27px !important;
 }
-.color-box:hover{
+.color-box:hover {
   border: 2px solid white;
 }
 .color-box {
