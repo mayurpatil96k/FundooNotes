@@ -1,23 +1,37 @@
 <script>
 import { getAllLabels } from './services/Label'
+import { addLabel, removeLabel } from './services/CardLabel'
 export default {
   data() {
     return {
-      selected: this.card.noteLabels.map(labelObj => labelObj.label),
+      selected: this.card.noteLabels.map((labelObj) => labelObj.label),
       labels: null
     }
   },
   props: {
     card: Object,
-    cardId:String
+    cardId: String
   },
   methods: {
     getLabel() {
       getAllLabels()
         .then((data) => (this.labels = data.data.data.details))
-        .then(() => console.log(this.labels))
-        .then(()=>console.log(this.card))
         .catch((err) => console.log(err))
+    },
+    handleCheckboxChange(label, note, name,event) {
+      const data = {}
+      const change = this.selected.find((ele) => ele == name)
+      if (change) {
+        console.log('+++++' + name)
+        addLabel(data, note, label)
+        this.$emit('Lrefresh');
+        event.stopPropagation();
+      } else {
+        console.log('-----' + name)
+        removeLabel(data, note, label)
+        this.$emit('Lrefresh');
+        event.stopPropagation();
+      }
     }
   },
   mounted() {
@@ -42,6 +56,7 @@ export default {
         density="compact"
         :label="item.label"
         :value="item.label"
+        @change.stop="handleCheckboxChange(item.id,cardId, item.label,event)"
       ></v-checkbox>
     </div>
   </v-card>

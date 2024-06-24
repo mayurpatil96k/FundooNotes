@@ -40,6 +40,7 @@ export default {
       arcNote(arc)
       this.$emit('refresh')
     },
+    refresh(){this.$emit('refresh')},
     handleItemClick(item) {
       // Example logic to determine when to show the second menu
       if (item.title === 'Label') {
@@ -176,7 +177,7 @@ export default {
       </v-list>
     </v-menu>
     <v-dialog v-model="dialog" max-width="210" min-height="180px">
-      <AddLabel :card="carddetails " :cardId="obj" :items="items" />
+      <AddLabel @Lrefresh="refresh" :card="carddetails " :cardId="obj" :items="items" />
     </v-dialog>
   </div>
 </template>

@@ -119,7 +119,7 @@ export default {
             </div>
             <v-card-text>{{ item.description }}</v-card-text>
             <div class="d-flex flex-row u-margin" >
-              <v-chip class="u-margin" v-for="label in item.noteLabels" density="compact" variant="outlined" closable> {{ label.label }} </v-chip>
+              <v-chip class="u-margin" v-for="label in item.noteLabels" density="compact" variant="outlined" > {{ label.label }} </v-chip>
             </div>
           </div>
 
