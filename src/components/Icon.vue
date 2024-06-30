@@ -40,6 +40,14 @@ export default {
       arcNote(arc)
       this.$emit('refresh')
     },
+    arcNote2() {
+      const arc = {
+        noteIdList: [this.obj],
+        isArchived: false
+      }
+      arcNote(arc)
+      this.$emit('refresh')
+    },
     refresh(){this.$emit('refresh')},
     handleItemClick(item) {
       // Example logic to determine when to show the second menu
@@ -58,6 +66,17 @@ export default {
       console.log(colorobj)
       changeColor(colorobj)
       this.$emit('refresh')
+    },
+    delrestore(){
+      const del = {
+          noteIdList: [this.obj],
+          isDeleted: false
+        }
+        deleteNote(del)
+        this.$emit('refresh')
+    },
+    delper(){
+      console.log("deleting...");
     }
   }
 }
@@ -65,6 +84,15 @@ export default {
 
 <template>
   <div>
+    <!-- for delete -->
+     <div v-if="$route.name == 'trash'">
+    <v-btn variant="plain" 
+      ><svg @click="delrestore()" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="18px" fill="#000000"><path d="M440-320h80v-166l64 62 56-56-160-160-160 160 56 56 64-62v166ZM280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z"/></svg></v-btn>
+    <v-btn variant="plain"
+      ><svg @click="delper()" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="18px" fill="#000000"><path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z"/></svg></v-btn>
+  </div>
+    <!-- for delete abo -->
+     <div v-else>
     <v-btn variant="plain"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +159,7 @@ export default {
           d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"
         /></svg
     ></v-btn>
-    <v-btn variant="plain"
+    <v-btn variant="plain" v-if="$route.name !== 'archieve'"
       ><svg
         @click="arcNote()"
         xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +172,11 @@ export default {
           d="m480-240 160-160-56-56-64 64v-168h-80v168l-64-64-56 56 160 160ZM200-640v440h560v-440H200Zm0 520q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v499q0 33-23.5 56.5T760-120H200Zm16-600h528l-34-40H250l-34 40Zm264 300Z"
         /></svg
     ></v-btn>
+    <!-- arcchieve logic -->
+    <v-btn variant="plain" v-else
+      ><svg xmlns="http://www.w3.org/2000/svg" @click="arcNote2()" height="24px" viewBox="0 -960 960 960" width="18px" fill="#000000"><path d="M480-560 320-400l56 56 64-64v168h80v-168l64 64 56-56-160-160Zm-280-80v440h560v-440H200Zm0 520q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v499q0 33-23.5 56.5T760-120H200Zm16-600h528l-34-40H250l-34 40Zm264 300Z"/></svg></v-btn>
 
+    
     <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn variant="plain" v-bind="props"
@@ -179,6 +211,7 @@ export default {
     <v-dialog v-model="dialog" max-width="210" min-height="180px">
       <AddLabel @Lrefresh="refresh" :card="carddetails " :cardId="obj" :items="items" />
     </v-dialog>
+  </div>
   </div>
 </template>
 

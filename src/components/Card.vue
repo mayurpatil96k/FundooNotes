@@ -4,7 +4,8 @@ import NewNote from './NewNote.vue'
 import Icon from './Icon.vue'
 import UpdateNote from './UpdateNote.vue'
 import MasonryWall from '@yeger/vue-masonry-wall'
-import { VProgressCircular } from 'vuetify/components' // Import the loader component
+import { VProgressCircular } from 'vuetify/components' 
+import { removeLabel } from './services/CardLabel'
 
 export default {
   components: {
@@ -38,6 +39,10 @@ export default {
       this.$emit('refreshing')
     },
     uprefreshing() {
+      this.$emit('refreshing')
+    },
+    removeLabel(index,itemid){
+      removeLabel({},itemid,index)
       this.$emit('refreshing')
     }
   },
@@ -119,7 +124,7 @@ export default {
             </div>
             <v-card-text>{{ item.description }}</v-card-text>
             <div class="d-flex flex-row u-margin" >
-              <v-chip class="u-margin" v-for="label in item.noteLabels" density="compact" variant="outlined" > {{ label.label }} </v-chip>
+              <v-chip  @click:close="removeLabel(label.id,item.id)" closable="true" class="u-margin" v-for="label in item.noteLabels" density="compact" variant="outlined" > {{ label.label }} </v-chip>
             </div>
           </div>
 
@@ -159,6 +164,7 @@ export default {
   font-size: 13px;
 }
 .u-margin{
+  height: auto !important;
   margin-left: 7px;
 }
 .CardIcons {
